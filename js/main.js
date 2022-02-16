@@ -7,7 +7,20 @@ const vermelho = document.getElementById('vermelho')
 const automatico = document.getElementById('automatico')
 let idAutomatico = null;
 
-////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////
+const cores = {
+    verde: "./img/verde.png",
+    vermelho: "./img/vermelho.png",
+    amarelo: "./img/amarelo.png",
+    desligado: "./img/desligado.png",
+}
+///////////////////////////////////////////////////////////////////
+
+let interval; // id do intervalo usado no modo automatico
+let proximaCor = cores.vermelho;
+
+///////////////////////////////////////////////////////////////////
 
 const semaforoVerde = () => {
     semaforo.src= "/img/verde.png"
@@ -31,28 +44,57 @@ vermelho.addEventListener("click", semaforoVermelho)
 /////////////////////////////////////////////////////////////////////
     
 
-    const ligarDesligar = () =>{
-        
-        if(semaforoVerde()){
-            amarelo()         
-        }else if (semaforoAmarelo){
-             vermelho()
-        }else if (semaforoVermelho){
-             verde()
-         }
-        else{
-            amarelo()   
-        }  
+const getProximaCor = () => {
+    let proximaCor;
+
+    if (semaforo.src.includes("/img/verde.png")) {
+        proximaCor = cores.amarelo;
+    } else if (semaforo.src.includes("/img/vermelho.png")) {
+        proximaCor = cores.verde;
+    } else if (semaforo.src.includes("/img/amarelo.png")) {
+        proximaCor = cores.vermelho;
+    } else if (semaforo.src.includes("/img/desligado.png")){
+        proximaCor = cores.verde;
     }
+
+    return proximaCor;
+}
+
 ///////////////////////////////////////////////////////////////////////
 
-const automaticoLigado = () => {
-    if(idAutomatico == null){
-          idAutomatico = setInterval(ligarDesligar, 500)  
-    }else {
-        clearInterval(idAutomatico)
-        idAutomatico = null
-    }  
-
+const ligarAutomatico = () =>{
+    if (interval == null) {
+        interval = setInterval(() => trocarCor(proximaCor), 1000);
+        automatico.textContent = "Parar";
+    } else {
+        desligarAutomatico()
+    }
 }
-automatico.addEventListener('click',automaticoLigado)
+automatico.addEventListener("click", ligarAutomatico)
+/////////////////////////////////////////////////////////////////////////////
+const desligarAutomatico = () => {
+    clearInterval(interval);
+    automatico.textContent = "Automático";
+    interval = null;
+}
+////////////////////////////////////////////////////////////////////////
+
+const clickButtonVerde = () =>{
+    trocarCor(cores.verde);
+    desligarAutomatico();
+}
+
+const clickButtonVermelho = () =>{
+    trocarCor(cores.vermelho);
+    desligarAutomatico();
+}
+
+const clickButtonAmarelo = () =>{
+    trocarCor(cores.amarelo);
+    desligarAutomatico();
+}
+//////////////////////////////////////////////////////////////////////
+const trocarCor = (cor) => {
+    semaforo.src = cor
+    proximaCor = getProximaCor();
+};
