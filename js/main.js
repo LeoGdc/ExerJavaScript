@@ -10,10 +10,10 @@ let idAutomatico = null;
 
 ////////////////////////////////////////////////////////////////
 const cores = {
-    verde: "./img/verde.png",
-    vermelho: "./img/vermelho.png",
-    amarelo: "./img/amarelo.png",
-    desligado: "./img/desligado.png",
+    verde: ".img/verde.png",
+    vermelho: ".img/vermelho.png",
+    amarelo: ".img/amarelo.png",
+    desligado: ".img/desligado.png",
 }
 ///////////////////////////////////////////////////////////////////
 
@@ -23,21 +23,21 @@ let proximaCor = cores.vermelho;
 ///////////////////////////////////////////////////////////////////
 
 const semaforoVerde = () => {
-    semaforo.src= "/img/verde.png"
+    semaforo.src= "img/verde.png"
 }
 verde.addEventListener("click", semaforoVerde)
 
 ////////////////////////////////////////////////////////////////////
 
 const semaforoAmarelo = () => {
-    semaforo.src= "/img/amarelo.png"
+    semaforo.src= "img/amarelo.png"
 }
 amarelo.addEventListener("click", semaforoAmarelo)
 
 ////////////////////////////////////////////////////////////////////
 
 const semaforoVermelho = () => {
-    semaforo.src= "/img/vermelho.png"
+    semaforo.src= "img/vermelho.png"
 }
 vermelho.addEventListener("click", semaforoVermelho)
 
@@ -47,13 +47,13 @@ vermelho.addEventListener("click", semaforoVermelho)
 const getProximaCor = () => {
     let proximaCor;
 
-    if (semaforo.src.includes("/img/verde.png")) {
+    if (semaforo.src.includes("img/verde.png")) {
         proximaCor = cores.amarelo;
-    } else if (semaforo.src.includes("/img/vermelho.png")) {
+    } else if (semaforo.src.includes("img/vermelho.png")) {
         proximaCor = cores.verde;
-    } else if (semaforo.src.includes("/img/amarelo.png")) {
+    } else if (semaforo.src.includes("img/amarelo.png")) {
         proximaCor = cores.vermelho;
-    } else if (semaforo.src.includes("/img/desligado.png")){
+    } else if (semaforo.src.includes("img/desligado.png")){
         proximaCor = cores.verde;
     }
 
